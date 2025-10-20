@@ -162,4 +162,57 @@ restartBtn.addEventListener("click", () => {
   startGame();
 });
 
+
+startGame();// ********* MOBILE TOUCH/SWIPE SUPPORT *********
+
+let touchstartX = 0;
+let touchendX = 0;
+let touchstartY = 0;
+let touchendY = 0;
+
+const gameContainer = document.getElementById('game-container'); // Game container ko id se le lo
+
+gameContainer.addEventListener('touchstart', e => {
+    touchstartX = e.changedTouches[0].screenX;
+    touchstartY = e.changedTouches[0].screenY;
+}, false);
+
+gameContainer.addEventListener('touchend', e => {
+    touchendX = e.changedTouches[0].screenX;
+    touchendY = e.changedTouches[0].screenY;
+    handleGesture();
+}, false);
+
+function handleGesture() {
+    const deltaX = touchendX - touchstartX;
+    const deltaY = touchendY - touchstartY;
+
+    // Check ki swipe vertical tha ya horizontal
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        // Horizontal Swipe
+        if (deltaX > 30) {
+            moveRight();
+        } else if (deltaX < -30) {
+            moveLeft();
+        }
+    } else {
+        // Vertical Swipe
+        if (deltaY > 30) {
+            moveDown();
+        } else if (deltaY < -30) {
+            moveUp();
+        }
+    }
+}
+
+// Ensure handleKeys is attached (yeh already hai, bas check kar lo)
+document.addEventListener("keydown", handleKeys); 
+
+// Restart button ka event listener (yeh bhi already hai)
+restartBtn.addEventListener("click", () => {
+    document.addEventListener("keydown", handleKeys);
+    startGame();
+});
+
+// Game shuru karo (yeh bhi already hai)
 startGame();
