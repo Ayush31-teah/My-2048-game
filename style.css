@@ -45,24 +45,24 @@ h1 {
 
 #board {
   display: grid;
-  grid-template-columns: repeat(5, 100px);
-  grid-template-rows: repeat(5, 100px);
-  gap: 10px;
+  grid-template-columns: repeat(5, 18vw);
+  grid-template-rows: repeat(5, 18vw);
+  gap: 1.5vw;
   background: #bbada0;
-  padding: 10px;
+  padding: 1.5vw;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
 .tile {
-  width: 100px;
-  height: 100px;
+  width: 18vw;
+  height: 18vw;
   background: #cdc1b4;
-  border-radius: 5px;
+  border-radius: 1vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2em;
+  font-size: 5vw;
   font-weight: bold;
   color: #776e65;
   transition: all 0.2s ease;
@@ -85,4 +85,5 @@ h1 {
 .x256 { background: #edcc61; color: #f9f6f2; font-size: 1.5em; }
 .x512 { background: #edc850; color: #f9f6f2; font-size: 1.5em; }
 .x1024 { background: #edc53f; color: #f9f6f2; font-size: 1.2em; }
+
 .x2048 { background: #edc22e; color: #f9f6f2; font-size: 1.2em; }
