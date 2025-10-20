@@ -162,8 +162,7 @@ restartBtn.addEventListener("click", () => {
   startGame();
 });
 
-
-startGame();// ********* MOBILE TOUCH/SWIPE SUPPORT *********
+// ********* MOBILE TOUCH/SWIPE SUPPORT *********
 
 let touchstartX = 0;
 let touchendX = 0;
@@ -216,3 +215,4 @@ restartBtn.addEventListener("click", () => {
 
 // Game shuru karo (yeh bhi already hai)
 startGame();
+
