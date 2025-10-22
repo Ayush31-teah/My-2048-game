@@ -1,89 +1,92 @@
 body {
-  font-family: "Segoe UI", sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background: #faf8ef;
-  margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: #faf8ef;
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
-  color: #776e65;
-  font-size: 3em;
-  margin-bottom: 10px;
-}
-
-#game-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    color: #776e65;
+    margin-bottom: 5px;
 }
 
 #score-box {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 15px;
-  font-size: 1.3em;
-  color: #776e65;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #776e65;
+}
+
+#score {
+    color: #eeae21; /* Gold-like color for score */
 }
 
 #restart {
-  background: #8f7a66;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1em;
-}
-#restart:hover {
-  background: #9c8573;
+    padding: 5px 10px;
+    font-size: 1em;
+    font-weight: bold;
+    background-color: #8f7a66;
+    color: #f9f6f2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease;
 }
 
+#restart:hover {
+    background-color: #9f8a76;
+}
+
+/* ************ RESPONSIVE BOARD AND TILE SIZES ************ */
 #board {
-  display: grid;
-  grid-template-columns: repeat(5, 18vw);
-  grid-template-rows: repeat(5, 18vw);
-  gap: 1.5vw;
-  background: #bbada0;
-  padding: 1.5vw;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    display: grid;
+    /* Tiles ki size vw mein, taaki mobile par fit ho sakein */
+    grid-template-columns: repeat(5, 18vw);
+    grid-template-rows: repeat(5, 18vw);
+    gap: 1.5vw; /* Gap bhi relative size mein */
+    padding: 1.5vw;
+    background: #bbada0;
+    border-radius: 6px;
+    box-shadow: 0 10px 0 rgba(0,0,0,0.2);
 }
 
 .tile {
-  width: 18vw;
-  height: 18vw;
-  background: #cdc1b4;
-  border-radius: 1vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 5vw;
-  font-weight: bold;
-  color: #776e65;
-  transition: all 0.2s ease;
+    /* Tiles ki size board ke columns ke hisaab se */
+    width: 18vw; 
+    height: 18vw;
+    background: #cdc1b4;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5vw; /* Font size bhi relative */
+    font-weight: bold;
+    color: #776e65;
+    transition: all 0.2s ease;
 }
 
-#message {
-  margin-top: 20px;
-  font-size: 2em;
-  color: #776e65;
-  font-weight: bold;
-}
-
-.x2 { background: #eee4da; }
-.x4 { background: #ede0c8; }
+/* ************ TILE COLORS ************ */
+/* (Baqi colors yahan waise hi rahenge) */
+.x2 { background: #eee4da; color: #776e65; }
+.x4 { background: #ede0c8; color: #776e65; }
 .x8 { background: #f2b179; color: #f9f6f2; }
 .x16 { background: #f59563; color: #f9f6f2; }
 .x32 { background: #f67c5f; color: #f9f6f2; }
 .x64 { background: #f65e3b; color: #f9f6f2; }
-.x128 { background: #edcf72; color: #f9f6f2; font-size: 1.5em; }
-.x256 { background: #edcc61; color: #f9f6f2; font-size: 1.5em; }
-.x512 { background: #edc850; color: #f9f6f2; font-size: 1.5em; }
-.x1024 { background: #edc53f; color: #f9f6f2; font-size: 1.2em; }
+.x128 { background: #edcf72; color: #f9f6f2; font-size: 4vw; }
+.x256 { background: #edcc61; color: #f9f6f2; font-size: 4vw; }
+.x512 { background: #edc850; color: #f9f6f2; font-size: 4vw; }
+.x1024 { background: #edc53f; color: #f9f6f2; font-size: 3.5vw; }
+.x2048 { background: #edc22e; color: #f9f6f2; font-size: 3.5vw; }
 
-.x2048 { background: #edc22e; color: #f9f6f2; font-size: 1.2em; }
+#message {
+    margin-top: 20px;
+    font-size: 2em;
+    color: #776e65;
+    font-weight: bold;
+}
