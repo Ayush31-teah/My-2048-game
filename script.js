@@ -1,9 +1,14 @@
-st board = document.getElementById("board");
+// ********* VARIABLE DECLARATIONS AND SETUP *********
+const board = document.getElementById("board");
 const scoreDisplay = document.getElementById("score");
 const message = document.getElementById("message");
 const restartBtn = document.getElementById("restart");
+// Game container ko select karna mobile touch/reload fix ke liye zaroori hai
+const gameContainer = document.getElementById('game-container'); 
 
 let grid, score;
+
+// ********* GAME FUNCTIONS *********
 
 function startGame() {
   grid = Array(5).fill().map(() => Array(5).fill(0));
@@ -147,7 +152,15 @@ function checkGameStatus() {
   }
 }
 
+
+// ********* INPUT HANDLING (KEYBOARD AND TOUCH) *********
+
 function handleKeys(e) {
+  // Fix: Keyboard ArrowUp/ArrowDown se page scroll/reload rokna
+  if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
+    e.preventDefault(); 
+  }
+
   switch (e.key) {
     case "ArrowLeft": moveLeft(); break;
     case "ArrowRight": moveRight(); break;
@@ -156,62 +169,64 @@ function handleKeys(e) {
   }
 }
 
+let touchstartX = 0;
+let touchendX = 0;
+let touchstartY = 0;
+let touchendY = 0;
+
+// Fix: Mobile Chrome Pull-to-Refresh rokna (poore document par touchmove laga diya)
+document.addEventListener('touchmove', function(e) {
+    // Sirf game container area mein default action ko roko
+    if (e.target.closest('#game-container')) {
+        e.preventDefault(); 
+    }
+}, { passive: false });
+
+// Touchstart event
+gameContainer.addEventListener('touchstart', e => {
+    touchstartX = e.changedTouches[0].screenX;
+    touchstartY = e.changedTouches[0].screenY;
+}, { passive: true });
+
+// Touchend event
+gameContainer.addEventListener('touchend', e => {
+    touchendX = e.changedTouches[0].screenX;
+    touchendY = e.changedTouches[0].screenY;
+    handleGesture();
+}, { passive: true });
+
+function handleGesture() {
+    const deltaX = touchendX - touchstartX;
+    const deltaY = touchendY - touchstartY;
+
+    // Minimum swipe distance
+    const minSwipe = 30;
+
+    // Check ki swipe vertical tha ya horizontal
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipe) {
+        // Horizontal Swipe
+        if (deltaX > 0) {
+            moveRight();
+        } else {
+            moveLeft();
+        }
+    } else if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > minSwipe) {
+        // Vertical Swipe
+        if (deltaY > 0) {
+            moveDown();
+        } else {
+            moveUp();
+        }
+    }
+}
+
+
+// ********* EVENT LISTENERS AND START *********
+
 document.addEventListener("keydown", handleKeys);
 restartBtn.addEventListener("click", () => {
   document.addEventListener("keydown", handleKeys);
   startGame();
 });
 
-// ********* MOBILE TOUCH/SWIPE SUPPORT *********
-
-let touchstartX = 0;
-let touchendX = 0;
-let touchstartY = 0;
-let touchendY = 0;
-
-const gameContainer = document.getElementById('game-container'); // Game container ko id se le lo
-
-gameContainer.addEventListener('touchstart', e => {
-    touchstartX = e.changedTouches[0].screenX;
-    touchstartY = e.changedTouches[0].screenY;
-}, false);
-
-gameContainer.addEventListener('touchend', e => {
-    touchendX = e.changedTouches[0].screenX;
-    touchendY = e.changedTouches[0].screenY;
-    handleGesture();
-}, false);
-
-function handleGesture() {
-    const deltaX = touchendX - touchstartX;
-    const deltaY = touchendY - touchstartY;
-
-    // Check ki swipe vertical tha ya horizontal
-    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-        // Horizontal Swipe
-        if (deltaX > 30) {
-            moveRight();
-        } else if (deltaX < -30) {
-            moveLeft();
-        }
-    } else {
-        // Vertical Swipe
-        if (deltaY > 30) {
-            moveDown();
-        } else if (deltaY < -30) {
-            moveUp();
-        }
-    }
-}
-
-// Ensure handleKeys is attached (yeh already hai, bas check kar lo)
-document.addEventListener("keydown", handleKeys); 
-
-// Restart button ka event listener (yeh bhi already hai)
-restartBtn.addEventListener("click", () => {
-    document.addEventListener("keydown", handleKeys);
-    startGame();
-});
-
-// Game shuru karo (yeh bhi already hai)
 startGame();
