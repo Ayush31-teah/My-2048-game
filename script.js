@@ -1,4 +1,4 @@
-const board = document.getElementById("board");
+st board = document.getElementById("board");
 const scoreDisplay = document.getElementById("score");
 const message = document.getElementById("message");
 const restartBtn = document.getElementById("restart");
@@ -215,4 +215,3 @@ restartBtn.addEventListener("click", () => {
 
 // Game shuru karo (yeh bhi already hai)
 startGame();
-
