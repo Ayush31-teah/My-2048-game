@@ -5,23 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2048 - My Game</title>
     
-    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="style.css">
 
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #faf8ef; /* Light cream background */
+        }
+        
+        h1 {
+            color: #776e65; /* Dark brown text */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D look */
+            font-weight: 700;
+        }
+        
+        #game-container {
+            /* Basic centered layout */
+            margin: 20px auto; 
+            max-width: 500px;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>2048 - 5x5 Grid</h1>
-    
     <div id="game-container">
+        <h1>2048 - 5x5 Grid</h1>
+
         <div id="score-box">
             <span>Score:</span> <span id="score">0</span>
             <button id="restart">Restart</button>
         </div>
-        <div id="board"></div>
+        
+        <div id="board"></div> 
+        
         <div id="message"></div>
     </div>
+
     <script src="script.js"></script>
 
 </body>
 </html>
-
